@@ -21,7 +21,7 @@ const App = ()=> {
 
   const handleLogin = async (email, password) => {   // ⬅️ added login handler
     try {
-      const res = await fetch("https://pragati-beta.vercel.app/api/auth/login", {
+      const res = await fetch("https://your-backend.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

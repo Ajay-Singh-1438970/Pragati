@@ -23,7 +23,7 @@ const AdminActions = ({ selectedAction }) => {
     }
 
     try {
-      const res = await axios.get("https://pragati-beta.vercel.app/api/auth/getuser", {
+      const res = await axios.get("https://your-backend.onrender.com/api/auth/getuser", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
