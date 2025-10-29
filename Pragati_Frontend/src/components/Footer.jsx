@@ -10,7 +10,7 @@ const [userCount, setUserCount] = useState(null);
 useEffect(() => {
     const fetchUserCount = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/users/count");
+        const { data } = await axios.get("https://pragati-beta.vercel.app/api/users/count");
         setUserCount(data.count);
       } catch (error) {
         console.error("Error fetching user count:", error);

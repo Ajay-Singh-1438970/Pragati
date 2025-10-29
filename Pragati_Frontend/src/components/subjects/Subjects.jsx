@@ -27,7 +27,7 @@ const Subjects = () => {
   // Fetch materials from backend
   const fetchMaterials = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/materials", {
+      const { data } = await axios.get("https://pragati-beta.vercel.app/api/materials", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMaterials(data);
@@ -84,7 +84,7 @@ const Subjects = () => {
 
       if (isEdit) {
         const { data } = await axios.put(
-          `http://localhost:5000/api/materials/${selectedMaterial._id}`,
+          `https://pragati-beta.vercel.app/api/materials/${selectedMaterial._id}`,
           payload,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -96,7 +96,7 @@ const Subjects = () => {
         );
       } else {
         const { data } = await axios.post(
-          "http://localhost:5000/api/materials/add",
+          "https://pragati-beta.vercel.app/api/materials/add",
           payload,
           { headers: { Authorization: `Bearer ${token}` } }
         );

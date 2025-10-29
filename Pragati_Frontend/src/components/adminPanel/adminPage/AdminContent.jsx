@@ -18,7 +18,7 @@ const AdminContent = ({ selectedAction, setSelectedAction }) => {
         return;
       }
       try {
-        const res = await axios.get("http://localhost:5000/api/auth/getuser", {
+        const res = await axios.get("https://pragati-beta.vercel.app/api/auth/getuser", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

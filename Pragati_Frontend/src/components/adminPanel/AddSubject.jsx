@@ -23,7 +23,7 @@ const AddSubject = () => {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/materials", {
+        const { data } = await axios.get("https://pragati-beta.vercel.app/api/materials", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setSubjects(data);
@@ -77,7 +77,7 @@ const AddSubject = () => {
       let response;
       if (isEdit) {
         response = await axios.put(
-          `http://localhost:5000/api/materials/${editId}`,
+          `https://pragati-beta.vercel.app/api/materials/${editId}`,
           payload,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -90,7 +90,7 @@ const AddSubject = () => {
         );
       } else {
         response = await axios.post(
-          "http://localhost:5000/api/materials/add",
+          "https://pragati-beta.vercel.app/api/materials/add",
           payload,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -112,7 +112,7 @@ const AddSubject = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this material?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/materials/${id}`, {
+      await axios.delete(`https://pragati-beta.vercel.app/api/materials/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSubjects((prev) => prev.filter((sub) => sub._id !== id));
