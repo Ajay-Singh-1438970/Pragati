@@ -37,5 +37,5 @@ const port = process.env.PORT || 5000;
 connectToDB()
 
 app.listen(5000, () => {
-      console.log(`✅ Server running on http://localhost:${port}`);
+      console.log(`✅ Server running on https://pragati-beta.vercel.app:${port}`);
     });
