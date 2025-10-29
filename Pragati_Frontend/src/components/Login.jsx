@@ -27,7 +27,7 @@ const Login = ({ show, handleClose }) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://your-backend.onrender.com/api/auth/signup",
+        "https://pragati-ifax.onrender.com/api/auth/signup",
         formData
       );
       if (res.data) {
@@ -53,7 +53,7 @@ const Login = ({ show, handleClose }) => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://your-backend.onrender.com/api/auth/login", {
+      const res = await axios.post("https://pragati-ifax.onrender.com/api/auth/login", {
         email: formData.email,
         password: formData.password,
       });

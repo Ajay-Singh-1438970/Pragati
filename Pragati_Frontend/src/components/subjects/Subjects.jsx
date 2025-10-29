@@ -27,7 +27,7 @@ const Subjects = () => {
   // Fetch materials from backend
   const fetchMaterials = async () => {
     try {
-      const { data } = await axios.get("https://your-backend.onrender.com/api/materials", {
+      const { data } = await axios.get("https://pragati-ifax.onrender.com/api/materials", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMaterials(data);
@@ -84,7 +84,7 @@ const Subjects = () => {
 
       if (isEdit) {
         const { data } = await axios.put(
-          `https://your-backend.onrender.com/api/materials/${selectedMaterial._id}`,
+          `https://pragati-ifax.onrender.com/api/materials/${selectedMaterial._id}`,
           payload,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -96,7 +96,7 @@ const Subjects = () => {
         );
       } else {
         const { data } = await axios.post(
-          "https://your-backend.onrender.com/api/materials/add",
+          "https://pragati-ifax.onrender.com/api/materials/add",
           payload,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -119,7 +119,7 @@ const Subjects = () => {
 
   const handleView = (fileUrl) => {
     window.open(
-      fileUrl.startsWith("http") ? fileUrl : `https://your-backend.onrender.com${fileUrl}`,
+      fileUrl.startsWith("http") ? fileUrl : `https://pragati-ifax.onrender.com${fileUrl}`,
       "_blank"
     );
   };

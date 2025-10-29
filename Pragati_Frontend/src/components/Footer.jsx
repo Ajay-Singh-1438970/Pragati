@@ -10,7 +10,7 @@ const [userCount, setUserCount] = useState(null);
 useEffect(() => {
     const fetchUserCount = async () => {
       try {
-        const { data } = await axios.get("https://your-backend.onrender.com/api/users/count");
+        const { data } = await axios.get("https://pragati-ifax.onrender.com/api/users/count");
         setUserCount(data.count);
       } catch (error) {
         console.error("Error fetching user count:", error);
