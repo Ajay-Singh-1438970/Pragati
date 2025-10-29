@@ -249,92 +249,92 @@ export default About;
 
 
 
-const TeamCard = ({ member }) => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "1.5rem",
-        background: "#fff",
-        padding: "1.5rem",
-        borderRadius: "10px",
-        boxShadow: "0 2px 8px rgba(35,64,142,0.06)",
-      }}
-    >
-      <img
-        src={member.img}
-        alt={member.name}
-        style={{
-          width: 72,
-          height: 72,
-          borderRadius: "50%",
-          border: "3px solid #23408e",
-        }}
-      />
-      <div style={{ flex: 1 }}>
-        <h3 style={{ margin: 0, color: "#23408e" }}>{member.name}</h3>
-        <p style={{ margin: "0.5rem 0", color: "#555" }}>
-          Email:{" "}
-          <a
-            href={`mailto:${member.email}`}
-            style={{ color: "#23408e", textDecoration: "underline" }}
-          >
-            {member.email}
-          </a>
-        </p>
-        <div style={{ display: "flex", gap: "0.7rem" }}>
-          <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
-            <button
-              style={{
-                padding: "0.6rem 1.2rem",
-                background: "#23408e",
-                color: "#fff",
-                border: "none",
-                borderRadius: "6px",
-                cursor: "pointer",
-                fontWeight: 600,
-                letterSpacing: "0.5px",
-              }}
-            >
-              LinkedIn
-            </button>
-          </a>
-          <a href={member.github} target="_blank" rel="noopener noreferrer">
-            <button
-              style={{
-                padding: "0.6rem 1.2rem",
-                background: "#24292e",
-                color: "#fff",
-                border: "none",
-                borderRadius: "6px",
-                cursor: "pointer",
-                fontWeight: 600,
-                letterSpacing: "0.5px",
-              }}
-            >
-              GitHub
-            </button>
-          </a>
-          <a href="#Portfolio">
-            <button
-              style={{
-                padding: "0.6rem 1.2rem",
-                background: "#4caf50",
-                color: "#fff",
-                border: "none",
-                borderRadius: "6px",
-                cursor: "pointer",
-                fontWeight: 600,
-                letterSpacing: "0.5px",
-              }}
-            >
-              Portfolio
-            </button>
-          </a>
-        </div>
-      </div>
+// const TeamCard = ({ member }) => {
+//   return (
+//     <div
+//       style={{
+//         display: "flex",
+//         alignItems: "center",
+//         gap: "1.5rem",
+//         background: "#fff",
+//         padding: "1.5rem",
+//         borderRadius: "10px",
+//         boxShadow: "0 2px 8px rgba(35,64,142,0.06)",
+//       }}
+//     >
+//       <img
+//         src={member.img}
+//         alt={member.name}
+//         style={{
+//           width: 72,
+//           height: 72,
+//           borderRadius: "50%",
+//           border: "3px solid #23408e",
+//         }}
+//       />
+//       <div style={{ flex: 1 }}>
+//         <h3 style={{ margin: 0, color: "#23408e" }}>{member.name}</h3>
+//         <p style={{ margin: "0.5rem 0", color: "#555" }}>
+//           Email:{" "}
+//           <a
+//             href={`mailto:${member.email}`}
+//             style={{ color: "#23408e", textDecoration: "underline" }}
+//           >
+//             {member.email}
+//           </a>
+//         </p>
+//         <div style={{ display: "flex", gap: "0.7rem" }}>
+//           <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
+//             <button
+//               style={{
+//                 padding: "0.6rem 1.2rem",
+//                 background: "#23408e",
+//                 color: "#fff",
+//                 border: "none",
+//                 borderRadius: "6px",
+//                 cursor: "pointer",
+//                 fontWeight: 600,
+//                 letterSpacing: "0.5px",
+//               }}
+//             >
+//               LinkedIn
+//             </button>
+//           </a>
+//           <a href={member.github} target="_blank" rel="noopener noreferrer">
+//             <button
+//               style={{
+//                 padding: "0.6rem 1.2rem",
+//                 background: "#24292e",
+//                 color: "#fff",
+//                 border: "none",
+//                 borderRadius: "6px",
+//                 cursor: "pointer",
+//                 fontWeight: 600,
+//                 letterSpacing: "0.5px",
+//               }}
+//             >
+//               GitHub
+//             </button>
+//           </a>
+//           <a href="#Portfolio">
+//             <button
+//               style={{
+//                 padding: "0.6rem 1.2rem",
+//                 background: "#4caf50",
+//                 color: "#fff",
+//                 border: "none",
+//                 borderRadius: "6px",
+//                 cursor: "pointer",
+//                 fontWeight: 600,
+//                 letterSpacing: "0.5px",
+//               }}
+//             >
+//               Portfolio
+//             </button>
+//           </a>
+//         </div>
+//       </div>
       
-    </div>
-  );
-};
+//     </div>
+//   );
+// };
