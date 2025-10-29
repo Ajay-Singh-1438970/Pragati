@@ -119,7 +119,7 @@ const Subjects = () => {
 
   const handleView = (fileUrl) => {
     window.open(
-      fileUrl.startsWith("http") ? fileUrl : `http://localhost:5000${fileUrl}`,
+      fileUrl.startsWith("http") ? fileUrl : `https://pragati-beta.vercel.app${fileUrl}`,
       "_blank"
     );
   };

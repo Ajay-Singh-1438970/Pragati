@@ -177,7 +177,7 @@ const AddSubject = () => {
                     <td>
                       {sub.fileUrl ? (
                         <a
-                          href={sub.fileUrl.startsWith("http") ? sub.fileUrl : `http://localhost:5000${sub.fileUrl}`}
+                          href={sub.fileUrl.startsWith("http") ? sub.fileUrl : `https://pragati-beta.vercel.app${sub.fileUrl}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
