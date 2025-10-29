@@ -8,7 +8,6 @@ import authRoutes from './routes/authRoute.js';
 import materialRoutes from './routes/materialRoute.js';
 import userRoutes from './routes/userRoutes.js';
 
-
 dotenv.config();
 
 const app = express();
