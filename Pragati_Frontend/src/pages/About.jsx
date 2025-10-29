@@ -7,27 +7,27 @@ import Footer from "../components/Footer";
 const About = () => {
 
   const teamMembers = [
-  {
-    name: "Ajay Singh",
-    img: "https://media.licdn.com/dms/image/v2/D4D03AQG3nUWI6hXE2g/profile-displayphoto-scale_400_400/B4DZlyzAGaIcAk-/0/1758567597470?e=1762387200&v=beta&t=KDJNu2IjNi61sl2M2dzV98k1xfnzbemcCJ44LQG4OA4",
-    email: "ajaysingh1438970@gmail.com",
-    linkedin: "https://www.linkedin.com/in/ajay5ingh/",
-    github: "https://github.com/Ajayy-Singh",
-  },
-  {
-    name: "Harshwardhan Ahirwar",
-    img: "https://media.licdn.com/dms/image/v2/D5603AQHha2ejYxpSCg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1701541313750?e=1762387200&v=beta&t=aoyL6QLZ7JcsmiziyT-YpTTpAv7TYKWtX7yAl7QSdlM",
-    email: "ahirwarharshwardhan2@gmail.com",
-    linkedin: "https://www.linkedin.com/in/harshwardhanahirwar",
-    github: "https://github.com/harshwardhanahirwar",
-  },
-  {
-    name: "Naman Gupta",
-    img: "https://media.licdn.com/dms/image/v2/D4D03AQFjobRCQEgzxA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1701700603335?e=1762387200&v=beta&t=U2depjOIo6_xOKZlUbgXCJrfZzjYAlCN8oM0M6SQig4",
-    email: "guptanamang119@email.com",
-    linkedin: "https://www.linkedin.com/in/naman-gupta-2b603b259/",
-    github: "https://github.com/Namangupta119",
-  },
+  // {
+  //   name: "Ajay Singh",
+  //   img: "https://media.licdn.com/dms/image/v2/D4D03AQG3nUWI6hXE2g/profile-displayphoto-scale_400_400/B4DZlyzAGaIcAk-/0/1758567597470?e=1762387200&v=beta&t=KDJNu2IjNi61sl2M2dzV98k1xfnzbemcCJ44LQG4OA4",
+  //   email: "ajaysingh1438970@gmail.com",
+  //   linkedin: "https://www.linkedin.com/in/ajay5ingh/",
+  //   github: "https://github.com/Ajayy-Singh",
+  // },
+  // {
+  //   name: "Harshwardhan Ahirwar",
+  //   img: "https://media.licdn.com/dms/image/v2/D5603AQHha2ejYxpSCg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1701541313750?e=1762387200&v=beta&t=aoyL6QLZ7JcsmiziyT-YpTTpAv7TYKWtX7yAl7QSdlM",
+  //   email: "ahirwarharshwardhan2@gmail.com",
+  //   linkedin: "https://www.linkedin.com/in/harshwardhanahirwar",
+  //   github: "https://github.com/harshwardhanahirwar",
+  // },
+  // {
+  //   name: "Naman Gupta",
+  //   img: "https://media.licdn.com/dms/image/v2/D4D03AQFjobRCQEgzxA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1701700603335?e=1762387200&v=beta&t=U2depjOIo6_xOKZlUbgXCJrfZzjYAlCN8oM0M6SQig4",
+  //   email: "guptanamang119@email.com",
+  //   linkedin: "https://www.linkedin.com/in/naman-gupta-2b603b259/",
+  //   github: "https://github.com/Namangupta119",
+  // },
 ];
 
   return (
