@@ -1,0 +1,47 @@
+/* Save this in a file named CourseCard.css */
+.course-card {
+  transition: transform 0.3s ease-in-out;
+  height: 100%; /* Ensures all cards in a row are the same height */
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* Enhanced shadow on hover */
+}
+
+.course-card-img {
+  height: 160px; /* Equivalent to Tailwind's h-40 */
+  object-fit: cover;
+}
+
+
+
+/* In a file like App.css or index.css */
+
+/* === For CourseCard component === */
+.course-card {
+  transition: transform 0.3s ease-in-out;
+  height: 100%; 
+}
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+.course-card-img {
+  height: 160px;
+  object-fit: cover;
+}
+
+/* === For ContinueLearningItem component === */
+.learning-item {
+  transition: all 0.3s ease-in-out;
+}
+.learning-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+.learning-item-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}

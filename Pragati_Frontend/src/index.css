@@ -1,0 +1,78 @@
+.hero-section {
+  height: 90vh; /* 70% of viewport height */
+  max-height: 700px; /* optional limit */
+}
+
+/* hero-section */
+/* Hero.css */
+.brand-name {
+  color: #ffcc00; /* Golden */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+  font-style: italic;
+}
+
+.hero-desc {
+  color: #ffffff; /* Pure white text */
+  font-size: 1.1rem; /* Slightly larger */
+  line-height: 1.8;
+  max-width: 850px; /* Wider for clarity */
+  margin: 0 auto;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8); /* glow effect */
+}
+
+/* footer */
+.social-icon {
+  color: #ffffff;
+  font-size: 22px;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #0d6efd; /* Bootstrap primary blue */
+}
+
+.social-icon:nth-child(1):hover {
+  color: #1877f2; /* Facebook Blue */
+}
+
+.social-icon:nth-child(2):hover {
+  color: #1da1f2; /* Twitter Blue */
+}
+
+.social-icon:nth-child(3):hover {
+  color: #e4405f; /* Instagram Pink */
+}
+
+.social-icon:nth-child(4):hover {
+  color: #0a66c2; /* LinkedIn Blue */
+}
+
+/* footer last line */
+.footer-link {
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+.footer-link:hover {
+  color: #0d6efd; /* Bootstrap primary */
+}
+
+.footer-icon {
+  color: #aaa;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.footer-icon:hover {
+  color: #0d6efd;
+  transform: scale(1.2);
+}
+/* 
+.text-gradient {
+  background: linear-gradient(90deg, #ff4d6d, #ff9f1c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+} */
+
+.footer-custom {
+  background-color: rgb(44, 44, 44); /* Light black / dark gray */
+  color: #f1f1f1; /* Light text */
+}

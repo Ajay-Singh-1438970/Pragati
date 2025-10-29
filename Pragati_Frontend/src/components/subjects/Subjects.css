@@ -1,0 +1,74 @@
+/* Smooth scroll + hide scrollbar */
+.scroll-container {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Page main heading */
+h2 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+h2::after {
+  content: "";
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to right, #ff6a00, #ffcc00);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  border-radius: 2px;
+}
+
+/* Semester heading */
+h4 {
+  font-weight: 600;
+  color: #34495e;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+h4::before {
+  content: "📘 ";
+}
+
+h4::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: #3498db;
+  margin-top: 5px;
+  border-radius: 2px;
+}
+
+/* Card styles */
+.card {
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+}
+
+/* Card title */
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
