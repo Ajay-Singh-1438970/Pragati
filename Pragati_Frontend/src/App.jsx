@@ -12,6 +12,10 @@ import NotesList from './components/NotesList';
 import PapersList from './components/PapersList';
 import AdminPanel from './components/adminPanel/AdminPanel';
 import Login from './components/Login';
+import VerifyEmail from './components/verifyEmail';
+import Profile from "./components/student/StudentDashboard/Profile";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = ()=> {
   const [message, setMessage] = useState("");
@@ -61,6 +65,8 @@ const App = ()=> {
 
         {/* ⬅️ Added Login route */}
         <Route path="/login" element={<Login/>} />
+        <Route path="/verify/:token" element={<VerifyEmail />} />
+
 
         {/* Protected routes example */}
         {/* <Route path="/student" element={isLoggedIn ? <StudentDashboard /> : <Login />} />
@@ -73,7 +79,10 @@ const App = ()=> {
         <Route path="/subjects/:subjectName/notes" element={<NotesList />} />
         <Route path="/subjects/:subjectName/papers" element={<PapersList />} />
         <Route path='/admin' element={<AdminPanel />} />
+        <Route path="/student/profile" element={<Profile />} />
+        <Route path="/admin/profile" element={<Profile />} />
       </Routes>
+        <ToastContainer position="bottom-right" autoClose={3000} />
     </>
   );
 }

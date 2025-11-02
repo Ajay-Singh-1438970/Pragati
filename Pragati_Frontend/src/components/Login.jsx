@@ -38,7 +38,6 @@ const Login = ({ show, handleClose }) => {
           email: "",
           password: "",
           confirmPassword: "",
-
         });
       }
       setIsSignup(false);
@@ -48,15 +47,21 @@ const Login = ({ show, handleClose }) => {
     }
   };
 
-  
-
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://pragati-ifax.onrender.com/api/auth/login", {
-        email: formData.email,
-        password: formData.password,
-      });
+      const res = await axios.post(
+        "https://pragati-ifax.onrender.com/api/auth/login",
+        {
+          email: formData.email,
+          password: formData.password,
+        }
+      );
+
+      if (res.data.user && !res.data.user.isVerified ) {
+        alert("Please verify your email before logging in.");
+        return;
+      }
 
       if (res.data.token) {
         alert("Login Successful!");
@@ -66,13 +71,13 @@ const Login = ({ show, handleClose }) => {
           { email: formData.email }, // you can replace with res.data.user if backend returns it
           res.data.token
         );
-        if(res.data.user.role === "admin"){
-          sessionStorage.setItem("role","admin");
-          navigate('/admin');
-        }else if(res.data.user.role === "user"){
-          navigate('/')
+        if (res.data.user.role === "admin") {
+          sessionStorage.setItem("role", "admin");
+          navigate("/admin");
+        } else if (res.data.user.role === "user") {
+          sessionStorage.setItem("role", "user");
+          navigate("/");
         }
-        
 
         handleClose();
       }
@@ -154,7 +159,7 @@ const Login = ({ show, handleClose }) => {
                 onChange={handleChange}
               />
             </Form.Group>
-           
+
             <Form.Group className="mb-3">
               <Form.Label>Avatar URL</Form.Label>
               <Form.Control

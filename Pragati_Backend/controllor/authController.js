@@ -1,10 +1,12 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import sendEmail from "../utils/sendEmail.js";
 
 // Signup
 export const signup = async (req, res) => {
   try {
+
     const { fullName, email, password, avatar } = req.body;
 
     // 1. Validate input
@@ -21,6 +23,8 @@ export const signup = async (req, res) => {
     // 3. Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const verificationToken = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
     // 4. Create new user
     const newUser = await User.create({
       fullName,
@@ -28,7 +32,48 @@ export const signup = async (req, res) => {
       password: hashedPassword,
       role: "user",
       avatar,
+      verificationToken,
     });
+
+    const verifyLink = `${process.env.FRONTEND_URL}/verify/${verificationToken}`;
+
+  const emailcontent = `
+  <div style="font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f6f8; padding: 40px 0;">
+    <div style="max-width: 600px; background: #ffffff; margin: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden;">
+      <div style="background: linear-gradient(135deg, #007bff, #0056b3); padding: 20px; text-align: center; color: #ffffff;">
+        <h1 style="margin: 0; font-size: 26px;">🎓 Welcome to <span style="font-weight: 600;">Pragati</span></h1>
+      </div>
+      <div style="padding: 30px; color: #333333;">
+        <p style="font-size: 16px;">Hi <strong>${fullName}</strong>,</p>
+        <p style="font-size: 16px; line-height: 1.6;">
+          We're excited to have you on board! Please verify your email address by clicking the button below:
+        </p>
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="${verifyLink}" 
+            style="background-color: #007bff; 
+                   color: #ffffff; 
+                   padding: 12px 24px; 
+                   border-radius: 6px; 
+                   text-decoration: none; 
+                   font-size: 16px;
+                   display: inline-block;">
+            Verify Email
+          </a>
+        </div>
+        <p style="font-size: 14px; color: #555555;">
+          This link will expire in <strong>24 hours</strong>.  
+          If you didn’t create an account, you can safely ignore this message.
+        </p>
+      </div>
+      <div style="background-color: #f1f3f6; text-align: center; padding: 15px; font-size: 13px; color: #777;">
+        <p style="margin: 0;">© ${new Date().getFullYear()} Pragati. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+`;
+
+
+    await sendEmail(email,"verify your Pragati account",emailcontent);
 
     // 5. Generate JWT
     const token = jwt.sign(
@@ -39,7 +84,7 @@ export const signup = async (req, res) => {
 
     // console.log(newUser);
     return res.status(201).json({
-      message: "User created successfully",
+      message: "Signup successful! Check your email to verify your account.",
       user: { id: newUser._id, fullName: newUser.fullName, email: newUser.email, avatar: newUser.avatar },
       token,
     });
