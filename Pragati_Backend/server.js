@@ -33,8 +33,16 @@ app.use("/api/users", userRoutes);
 // Start server after DB connection
 const port = process.env.PORT || 5000;
 
-connectToDB()
-
-app.listen(port, () => {
-      console.log(`✅ Server running on ${port}`);
+const startServer = async () => {
+  try {
+    await connectToDB();
+    app.listen(port, () => {
+      console.log(`✅ Server running on port ${port}`);
     });
+  } catch (err) {
+    console.error("❌ Failed to connect to MongoDB:", err);
+    process.exit(1);
+  }
+};
+
+startServer();
