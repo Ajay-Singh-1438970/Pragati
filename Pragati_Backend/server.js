@@ -43,8 +43,8 @@ const startServer = async () => {
   }
 
   console.log("🟢 Starting Express server...");
-  app.listen(PORT, () => {
-    console.log(`✅ Server running and listening on port ${PORT}`);
+  app.listen(port, () => {
+    console.log(`✅ Server running and listening on port ${port}`);
   });
 };
 
