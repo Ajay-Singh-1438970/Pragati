@@ -34,15 +34,18 @@ app.use("/api/users", userRoutes);
 const port = process.env.PORT || 5000;
 
 const startServer = async () => {
+  console.log("🟡 Attempting to connect to MongoDB...");
   try {
     await connectToDB();
-    app.listen(port, () => {
-      console.log(`✅ Server running on port ${port}`);
-    });
+    console.log("🟢 MongoDB connection successful!");
   } catch (err) {
-    console.error("❌ Failed to connect to MongoDB:", err);
-    process.exit(1);
+    console.error("❌ MongoDB connection failed:", err);
   }
+
+  console.log("🟢 Starting Express server...");
+  app.listen(PORT, () => {
+    console.log(`✅ Server running and listening on port ${PORT}`);
+  });
 };
 
 startServer();
