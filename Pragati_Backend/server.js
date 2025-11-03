@@ -29,6 +29,17 @@ app.use('/api/auth', authRoutes);
 app.use('/api/materials', materialRoutes);
 app.use("/api/users", userRoutes);
 
+//////////////////////////////////////////////////////
+app.get("/debug-env", (req, res) => {
+  res.json({
+    FRONTEND_URL: process.env.FRONTEND_URL,
+    EMAIL_USER: process.env.EMAIL_USER,
+    EMAIL_PASS: process.env.EMAIL_PASS ? "✅ Loaded" : "❌ Missing",
+    JWT_SECRET: process.env.JWT_SECRET ? "✅ Loaded" : "❌ Missing",
+  });
+});
+
+//////////////////////////////////////////////////////
 
 // Start server after DB connection
 const port = process.env.PORT || 5000;
