@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Test route
-app.get('/test', (req, res) => res.send("hello"));
+app.get('/test', (req, res) => res.send("hello from backend"));
 
 // API routes
 app.use('/api/auth', authRoutes);
@@ -33,19 +33,8 @@ app.use("/api/users", userRoutes);
 // Start server after DB connection
 const port = process.env.PORT || 5000;
 
-const startServer = async () => {
-  console.log("🟡 Attempting to connect to MongoDB...");
-  try {
-    await connectToDB();
-    console.log("🟢 MongoDB connection successful!");
-  } catch (err) {
-    console.error("❌ MongoDB connection failed:", err);
-  }
+connectToDB()
 
-  console.log("🟢 Starting Express server...");
-  app.listen(port, '0.0.0.0',() => {
-    console.log(`✅ Server running and listening on port ${port}`);
-  });
-};
-
-startServer();
+app.listen(port, () => {
+      console.log(`✅ Server running on ${port}`);
+    });

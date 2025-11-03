@@ -9,7 +9,7 @@ const VerifyEmail = () => {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-       const { data } = await axios.get(`https://pragati-ifax.onrender.com/api/auth/verify/${token}`);
+       const { data } = await axios.get(`https://pragati-2-0.onrender.com/api/auth/verify/${token}`);
 
         setMessage(data.message);
       } catch (error) {

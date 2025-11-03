@@ -83,7 +83,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const { data } = await axios.get("https://pragati-ifax.onrender.com/api/auth/profile", {
+        const { data } = await axios.get("https://pragati-2-0.onrender.com/api/auth/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(data.user);
