@@ -7,6 +7,8 @@ import connectToDB from './config/db.js';
 import authRoutes from './routes/authRoute.js';
 import materialRoutes from './routes/materialRoute.js';
 import userRoutes from './routes/userRoutes.js';
+import sendEmail from "./utils/sendEmail.js";
+
 
 dotenv.config();
 
@@ -30,14 +32,15 @@ app.use('/api/materials', materialRoutes);
 app.use("/api/users", userRoutes);
 
 //////////////////////////////////////////////////////
-app.get("/debug-env", (req, res) => {
-  res.json({
-    FRONTEND_URL: process.env.FRONTEND_URL,
-    EMAIL_USER: process.env.EMAIL_USER,
-    EMAIL_PASS: process.env.EMAIL_PASS ? "✅ Loaded" : "❌ Missing",
-    JWT_SECRET: process.env.JWT_SECRET ? "✅ Loaded" : "❌ Missing",
-  });
+app.get("/test-email", async (req, res) => {
+  try {
+    await sendEmail("ajaysingh1438970@gmail.com", "Test Email", "<h1>Brevo SMTP is working 🚀</h1>");
+    res.send("✅ Test email sent successfully");
+  } catch (err) {
+    res.status(500).send("❌ Failed to send email: " + err.message);
+  }
 });
+
 
 //////////////////////////////////////////////////////
 
