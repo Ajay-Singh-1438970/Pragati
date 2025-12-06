@@ -111,7 +111,7 @@ const EditProfileModal = ({ show, handleClose, user, setUser }) => {
       setLoading(true);
 
       const { data } = await axios.put(
-        "http://localhost:5000/api/auth/update-profile",
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/update-profile`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -134,6 +134,8 @@ const EditProfileModal = ({ show, handleClose, user, setUser }) => {
 
   return (
     <Modal show={show} onHide={handleClose} centered>
+      <div className="login-card light-theme">
+
       <Modal.Header closeButton>
         <Modal.Title>Edit Profile</Modal.Title>
       </Modal.Header>
@@ -149,7 +151,7 @@ const EditProfileModal = ({ show, handleClose, user, setUser }) => {
               value={formData.fullName}
               onChange={handleChange}
               placeholder="Enter your full name"
-            />
+              />
           </Form.Group>
 
           {/* Avatar URL */}
@@ -161,7 +163,7 @@ const EditProfileModal = ({ show, handleClose, user, setUser }) => {
               value={formData.avatar}
               onChange={handleChange}
               placeholder="Enter image URL"
-            />
+              />
             {formData.avatar && (
               <div className="text-center mt-3">
                 <img
@@ -173,7 +175,7 @@ const EditProfileModal = ({ show, handleClose, user, setUser }) => {
                     borderRadius: "50%",
                     objectFit: "cover",
                   }}
-                />
+                  />
               </div>
             )}
           </Form.Group>
@@ -187,7 +189,7 @@ const EditProfileModal = ({ show, handleClose, user, setUser }) => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Leave blank to keep current password"
-            />
+              />
           </Form.Group>
         </Form>
       </Modal.Body>
@@ -200,6 +202,7 @@ const EditProfileModal = ({ show, handleClose, user, setUser }) => {
           {loading ? <Spinner size="sm" animation="border" /> : "Save Changes"}
         </Button>
       </Modal.Footer>
+              </div>
     </Modal>
   );
 };

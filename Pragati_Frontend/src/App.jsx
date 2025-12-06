@@ -14,6 +14,7 @@ import AdminPanel from './components/adminPanel/AdminPanel';
 import Login from './components/Login';
 import VerifyEmail from './components/verifyEmail';
 import Profile from "./components/student/StudentDashboard/Profile";
+import NotFound from './components/NotFound';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -81,6 +82,7 @@ const App = ()=> {
         <Route path='/admin' element={<AdminPanel />} />
         <Route path="/student/profile" element={<Profile />} />
         <Route path="/admin/profile" element={<Profile />} />
+        <Route path="*" element={<NotFound />} /> {/* This handles invalid routes */}
       </Routes>
         <ToastContainer position="bottom-right" autoClose={3000} />
     </>

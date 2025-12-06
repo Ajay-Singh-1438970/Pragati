@@ -6,6 +6,8 @@ import sendEmail from "../utils/sendEmail.js";
 // Signup
 export const signup = async (req, res) => {
   try {
+    console.log("🚀 Signup request received", req.body);
+
 
     const { fullName, email, password, avatar } = req.body;
 
@@ -36,6 +38,8 @@ export const signup = async (req, res) => {
     });
 
     const verifyLink = `${process.env.FRONTEND_URL}/verify/${verificationToken}`;
+    console.log("📧 Verification link:", verifyLink);
+
 
   const emailcontent = `
   <div style="font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f6f8; padding: 40px 0;">
@@ -72,6 +76,8 @@ export const signup = async (req, res) => {
   </div>
 `;
 
+    console.log("📧 Sending verification email to:", email);
+    console.log("Link:", verifyLink);
 
     await sendEmail(email,"verify your Pragati account",emailcontent);
 
@@ -104,7 +110,18 @@ export const login = async (req, res) => {
     // console.log(count);
     if(count === 0) {
       const newAdmin = await User.create({email, password, role: 'admin'});
-      return res.status(201).json({success: true, admin: newAdmin, message: "Admin registered successfully"})
+      return res.status(201).json({
+        success: true, 
+        user: {
+          id: newAdmin._id,
+          email: newAdmin.email,
+          role: newAdmin.role,
+          fullName: newAdmin.fullName,
+          avatar: newAdmin.avatar,
+          isVerified: newAdmin.isVerified
+        },
+        message: "Admin registered successfully"
+      });
     }
     
 
@@ -146,7 +163,7 @@ export const login = async (req, res) => {
 
     return res.status(200).json({
       message: "Login successful",
-      user: { id: user._id, fullName: user.fullName, email: user.email, role: user.role, avatar: user.avatar },
+      user: { id: user._id, fullName: user.fullName, email: user.email, role: user.role, avatar: user.avatar, isVerified: user.isVerified },
       token,
     });
   } catch (error) {

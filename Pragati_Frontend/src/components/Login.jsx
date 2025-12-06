@@ -27,7 +27,7 @@ const Login = ({ show, handleClose }) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://pragati-2-0.onrender.com/api/auth/signup",
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`,
         formData
       );
       if (res.data) {
@@ -51,13 +51,13 @@ const Login = ({ show, handleClose }) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://pragati-2-0.onrender.com/api/auth/login",
+       `${import.meta.env.VITE_BACKEND_URL}/api/auth/login`,
         {
           email: formData.email,
           password: formData.password,
         }
       );
-
+        
       if (res.data.user && !res.data.user.isVerified ) {
         alert("Please verify your email before logging in.");
         return;

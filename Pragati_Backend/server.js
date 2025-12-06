@@ -19,8 +19,8 @@ const __dirname = path.resolve();
 
 // Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json());  // used for supporting all the frameworks and library.
+app.use(express.urlencoded({ extended: true }));  // used for supporting forms like login forms for using post method
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Test route
@@ -34,13 +34,17 @@ app.use("/api/users", userRoutes);
 //////////////////////////////////////////////////////
 app.get("/test-email", async (req, res) => {
   try {
-    await sendEmail("ajaysingh1438970@gmail.com", "Test Email", "<h1>Brevo SMTP is working 🚀</h1>");
+    await sendEmail("ajaysingh1438970@gmail.com", "Test Email", "<h1>THIS IS THE PRAGATI PROJECT TESTING EMAIL !!. Gmail SMTP is working 🚀</h1>");
     res.send("✅ Test email sent successfully");
   } catch (err) {
     res.status(500).send("❌ Failed to send email: " + err.message);
   }
 });
 
+// This is to manage invalid routes and 404 errors from backend
+app.use((req, res) => {
+  res.status(404).send("Check your URL, Route not found!");
+});
 
 //////////////////////////////////////////////////////
 
