@@ -9,7 +9,7 @@ const VerifyEmail = () => {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-       const { data } = await axios.get(`https://pragati-2-0.onrender.com/api/auth/verify/${token}`);
+       const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/auth/verify/${token}`);
 
         setMessage(data.message);
       } catch (error) {
@@ -22,7 +22,7 @@ const VerifyEmail = () => {
   return (
     <div className="text-center p-5">
       <h2>{message}</h2>
-      <Link to="/login" className="btn btn-primary mt-3">Go to Login</Link>
+      <Link to="/" className="btn btn-primary mt-3">Go to Login</Link>
     </div>
   );
 };

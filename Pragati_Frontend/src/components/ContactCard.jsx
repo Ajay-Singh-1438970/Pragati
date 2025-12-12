@@ -23,7 +23,7 @@ const ContactCard = () => {
         </div>
         <div>
           <h3>Phone Numbers</h3>
-          <p>+91 0123456789 <br /> +91 9876543210</p>
+          <p>+91 965xxxxx45 <br /> +91 834xxxxxx14</p>
         </div>
       </div>
 

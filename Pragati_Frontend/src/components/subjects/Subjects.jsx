@@ -27,7 +27,7 @@ const Subjects = () => {
   // Fetch materials from backend
   const fetchMaterials = async () => {
     try {
-      const { data } = await axios.get("https://pragati-2-0.onrender.com/api/materials", {
+      const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/materials`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMaterials(data);
@@ -84,7 +84,7 @@ const Subjects = () => {
 
       if (isEdit) {
         const { data } = await axios.put(
-          `https://pragati-2-0.onrender.com/api/materials/${selectedMaterial._id}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/materials/${selectedMaterial._id}`,
           payload,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -96,7 +96,7 @@ const Subjects = () => {
         );
       } else {
         const { data } = await axios.post(
-          "https://pragati-2-0.onrender.com/api/materials/add",
+          `${import.meta.env.VITE_BACKEND_URL}/api/materials/add`,
           payload,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -117,12 +117,34 @@ const Subjects = () => {
     }
   };
 
-  const handleView = (fileUrl) => {
-    window.open(
-      fileUrl.startsWith("http") ? fileUrl : `https://pragati-2-0.onrender.com${fileUrl}`,
-      "_blank"
-    );
-  };
+  const handleView = async (material) => {
+  const userId = JSON.parse(sessionStorage.getItem("user"));
+  if (!userId.id) {
+    alert("User not logged in");
+    return;
+  }
+
+  // 1️⃣ Update recent files in backend
+  try {    
+    await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/recentFiles`, {
+      userId: userId.id,
+      fileId: material._id,
+      fileName: material.title,
+      fileUrl: material.fileUrl,
+    });
+  } catch (error) {
+    console.error("Error updating recent files:", error);
+  }
+
+  // 2️⃣ Open the file
+  window.open(
+    material.fileUrl.startsWith("http")
+      ? material.fileUrl
+      : `${import.meta.env.VITE_BACKEND_URL}${material.fileUrl}`,
+    "_blank"
+  );
+};
+
 
   // Group materials by semester
   const groupedBySemester = materials.reduce((acc, mat) => {
@@ -207,7 +229,7 @@ const Subjects = () => {
                       <Button
                         variant="primary"
                         size="sm"
-                        onClick={() => handleView(mat.fileUrl)}
+                        onClick={() => handleView(mat)}
                       >
                         View File
                       </Button>

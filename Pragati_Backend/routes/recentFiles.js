@@ -1,33 +1,56 @@
-// Add a recently opened file (FIXED)
-router.post('/', async (req, res) => {
+import express from "express";
+import User from "../models/User.js";
+
+const router = express.Router();
+
+// POST /api/recentFiles
+router.post("/", async (req, res) => {
   const { userId, fileId, fileName, fileUrl } = req.body;
-  const now = new Date();
+
+  if (!userId) {
+    return res.status(401).json({ message: "User not logged in" });
+  }
 
   try {
     const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-    if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
-    }
+    // Remove duplicate if it exists
+    user.recentFiles = user.recentFiles.filter(f => f.fileId !== fileId);
 
-    // Remove old file if exists (avoid duplicates)
-    user.recentFiles = user.recentFiles.filter((f) => f.fileId !== fileId);
-
-    // Add new at top
+    // Add new file at the top
     user.recentFiles.unshift({
       fileId,
       fileName,
       fileUrl,
-      openedAt: now
+      openedAt: new Date()
     });
 
-    // Limit to last 5 items
+    // Keep only last 5 recent files
     user.recentFiles = user.recentFiles.slice(0, 5);
 
-    await user.save(); // <<< 🚨 IMPORTANT
+    await user.save();
 
     res.json({ success: true, recentFiles: user.recentFiles });
   } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
   }
 });
+
+// GET /api/recentFiles/:userId
+router.get("/:userId", async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json(user.recentFiles);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+export default router;

@@ -10,7 +10,7 @@ const [userCount, setUserCount] = useState(null);
 useEffect(() => {
     const fetchUserCount = async () => {
       try {
-        const { data } = await axios.get("https://pragati-2-0.onrender.com/api/users/count");
+        const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/count`);
         setUserCount(data.count);
       } catch (error) {
         console.error("Error fetching user count:", error);
@@ -65,7 +65,7 @@ return (
             <h5 className="fw-bold mb-3 text-light">Contact</h5>
             <p className="small mb-1 text-light">📍 Bhopal, India</p>
             <p className="small mb-1 text-light">📧 pragati.edunet@gmail.com</p>
-            <p className="small text-light">📞 +91 9876543210</p>
+            <p className="small text-light">📞 +91 0000000000</p>
           </div>
 
           {/* Social Links */}

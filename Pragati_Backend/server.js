@@ -8,7 +8,7 @@ import authRoutes from './routes/authRoute.js';
 import materialRoutes from './routes/materialRoute.js';
 import userRoutes from './routes/userRoutes.js';
 import sendEmail from "./utils/sendEmail.js";
-
+import recentFilesRoute from "./routes/recentFiles.js";
 
 dotenv.config();
 
@@ -24,12 +24,13 @@ app.use(express.urlencoded({ extended: true }));  // used for supporting forms l
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Test route
-app.get('/test', (req, res) => res.send("hello from backend"));
+app.get('/', (req, res) => res.send("hello from backend"));
 
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/materials', materialRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/recentFiles", recentFilesRoute);
 
 //////////////////////////////////////////////////////
 app.get("/test-email", async (req, res) => {

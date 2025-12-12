@@ -1,53 +1,3 @@
-// import { createContext, useState, useEffect } from "react";
-
-// export const AuthContext = createContext();
-
-// export const AuthProvider = ({ children }) => {
-//   const [isLoggedIn, setIsLoggedIn] = useState(false);
-//   const [user, setUser] = useState(null);
-
-//   // Check token on page load
-//   useEffect(() => {
-//     const token = localStorage.getItem("token");
-//     if (token) {
-//       setIsLoggedIn(true);
-//       setUser({ email: localStorage.getItem("email") });
-//       // Optionally, fetch user details from backend using token
-//     }
-//   }, []);
-
-//   //login function
-//    const login = (email, token) => {
-//     // if success:
-    
-//     localStorage.setItem("token", token);
-//     localStorage.setItem("email", email.email);
-//     setIsLoggedIn(true);
-//     setUser({ email });
-//   };
-
-
-//   // Logout function
-//   const logout = () => {
-//     localStorage.removeItem("token");
-//     localStorage.removeItem("email");
-//     sessionStorage.clear();
-//     setIsLoggedIn(false);
-//     setUser(null);
-//   };
-
-  
-
-//   return (
-//     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, login, logout}}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
-
-
-
-
 import { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
@@ -57,34 +7,33 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
-  // Check token on page load
+  // Restore user on refresh
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    const storedEmail = localStorage.getItem("email");
-    if (storedToken && storedEmail) {
-      setIsLoggedIn(true);
-      setUser({ email: storedEmail });
+    const storedUser = sessionStorage.getItem("user");
+    const storedToken = sessionStorage.getItem("token");
+
+    if (storedUser && storedToken) {
+      setUser(JSON.parse(storedUser));
       setToken(storedToken);
+      setIsLoggedIn(true);
     }
   }, []);
 
-  // login function
-  const login = (email, token) => {
-    localStorage.setItem("token", token);
-    localStorage.setItem("email", email);
-    setIsLoggedIn(true);
-    setUser({ email });
+  // LOGIN FIXED
+  const login = (userObj, token) => {
+    sessionStorage.setItem("user", JSON.stringify(userObj));
+    sessionStorage.setItem("token", token);
+
+    setUser(userObj);        // ← save full user, not just email
     setToken(token);
+    setIsLoggedIn(true);
   };
 
-  // logout function
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
     sessionStorage.clear();
-    setIsLoggedIn(false);
     setUser(null);
     setToken(null);
+    setIsLoggedIn(false);
   };
 
   return (

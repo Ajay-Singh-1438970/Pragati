@@ -51,14 +51,14 @@ const Login = ({ show, handleClose }) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-       `${import.meta.env.VITE_BACKEND_URL}/api/auth/login`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/login`,
         {
           email: formData.email,
           password: formData.password,
         }
       );
-        
-      if (res.data.user && !res.data.user.isVerified ) {
+
+      if (res.data.user && !res.data.user.isVerified) {
         alert("Please verify your email before logging in.");
         return;
       }
@@ -66,16 +66,12 @@ const Login = ({ show, handleClose }) => {
       if (res.data.token) {
         alert("Login Successful!");
 
-        // ✅ Update AuthContext instead of only setting localStorage
-        login(
-          { email: formData.email }, // you can replace with res.data.user if backend returns it
-          res.data.token
-        );
+        // ✅ Update AuthContext instead of only setting sessionStorage
+        login(res.data.user, res.data.token);
+        sessionStorage.setItem("role", res.data.user.role);
         if (res.data.user.role === "admin") {
-          sessionStorage.setItem("role", "admin");
           navigate("/admin");
         } else if (res.data.user.role === "user") {
-          sessionStorage.setItem("role", "user");
           navigate("/");
         }
 

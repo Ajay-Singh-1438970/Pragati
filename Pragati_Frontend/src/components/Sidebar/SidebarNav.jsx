@@ -8,7 +8,7 @@ const SidebarNav = ({ active, setActive }) => {
   // Try to read role and token
   const role = sessionStorage.getItem("role");
   const token = localStorage.getItem("token") || sessionStorage.getItem("token");
-
+  
   const handleProfileClick = () => {
     setActive("Profile");
     if (role === "admin") {

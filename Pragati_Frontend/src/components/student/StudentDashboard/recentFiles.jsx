@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { ListGroup } from 'react-bootstrap';
+import { BookOpen} from "lucide-react";
 
 function RecentFiles({ currentUser }) {
   const [recentFiles, setRecentFiles] = useState([]);
@@ -9,7 +11,7 @@ function RecentFiles({ currentUser }) {
 
     const fetchRecentFiles = async () => {
       try {
-        const res = await fetch(`/api/recent-files/${currentUser._id}`);
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/recentFiles/${currentUser._id}`);
         const data = await res.json();
         setRecentFiles(data);
       } catch (err) {
@@ -27,12 +29,12 @@ function RecentFiles({ currentUser }) {
 
     try {
       // POST request to backend to update recent files
-      await fetch('/api/recent-files', {
+      await fetch('/api/recentFiles', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userId: currentUser._id,
-          fileId: file._id,
+          fileId: file.fileId,
           fileName: file.title || file.fileName,
           fileUrl: file.fileUrl
         })
@@ -49,21 +51,22 @@ function RecentFiles({ currentUser }) {
   };
 
   return (
-    <div style={{ width: '250px', border: '1px solid #ddd', padding: '10px' }}>
-      <h3>Recently Opened</h3>
+    <div>
+      {/* <h3>Recently Opened</h3> */}
       {recentFiles.length === 0 && <p>No recent files</p>}
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+        <ListGroup variant="flush">
         {recentFiles.map(file => (
-          <li
+          <ListGroup.Item
             key={file.fileId}
-            style={{ marginBottom: '10px', cursor: 'pointer' }}
+            style={{ padding: '16px', cursor: 'pointer' }}
             onClick={() => handleOpenFile(file)}
           >
+            <BookOpen color="black" size={20} className="text-warning me-2" />
             <strong>{file.fileName}</strong><br/>
             <small>{new Date(file.openedAt).toLocaleString()}</small>
-          </li>
+          </ListGroup.Item>
         ))}
-      </ul>
+        </ListGroup>
     </div>
   );
 }

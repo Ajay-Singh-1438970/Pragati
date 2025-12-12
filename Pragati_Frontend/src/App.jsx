@@ -26,7 +26,7 @@ const App = ()=> {
 
   const handleLogin = async (email, password) => {   // ⬅️ added login handler
     try {
-      const res = await fetch("https://pragati-2-0.onrender.com/api/auth/login", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

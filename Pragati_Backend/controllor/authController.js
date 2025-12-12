@@ -88,7 +88,6 @@ export const signup = async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    // console.log(newUser);
     return res.status(201).json({
       message: "Signup successful! Check your email to verify your account.",
       user: { id: newUser._id, fullName: newUser.fullName, email: newUser.email, avatar: newUser.avatar },
@@ -114,9 +113,10 @@ export const login = async (req, res) => {
         success: true, 
         user: {
           id: newAdmin._id,
-          email: newAdmin.email,
-          role: newAdmin.role,
           fullName: newAdmin.fullName,
+          email: newAdmin.email,
+          password: newAdmin.password,
+          role: newAdmin.role,
           avatar: newAdmin.avatar,
           isVerified: newAdmin.isVerified
         },
