@@ -58,7 +58,7 @@ const Login = ({ show, handleClose }) => {
         }
       );
 
-      if (res.data.user && !res.data.user.isVerified) {
+      if (res.data.user.role !== "admin" && !res.data.user.isVerified) {
         alert("Please verify your email before logging in.");
         return;
       }

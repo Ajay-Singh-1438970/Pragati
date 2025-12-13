@@ -8,7 +8,6 @@ export const signup = async (req, res) => {
   try {
     console.log("🚀 Signup request received", req.body);
 
-
     const { fullName, email, password, avatar } = req.body;
 
     // 1. Validate input
@@ -25,7 +24,9 @@ export const signup = async (req, res) => {
     // 3. Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const verificationToken = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    const verificationToken = jwt.sign({ email }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
 
     // 4. Create new user
     const newUser = await User.create({
@@ -40,8 +41,7 @@ export const signup = async (req, res) => {
     const verifyLink = `${process.env.FRONTEND_URL}/verify/${verificationToken}`;
     console.log("📧 Verification link:", verifyLink);
 
-
-  const emailcontent = `
+    const emailcontent = `
   <div style="font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f6f8; padding: 40px 0;">
     <div style="max-width: 600px; background: #ffffff; margin: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden;">
       <div style="background: linear-gradient(135deg, #007bff, #0056b3); padding: 20px; text-align: center; color: #ffffff;">
@@ -79,7 +79,7 @@ export const signup = async (req, res) => {
     console.log("📧 Sending verification email to:", email);
     console.log("Link:", verifyLink);
 
-    await sendEmail(email,"verify your Pragati account",emailcontent);
+    await sendEmail(email, "verify your Pragati account", emailcontent);
 
     // 5. Generate JWT
     const token = jwt.sign(
@@ -90,10 +90,14 @@ export const signup = async (req, res) => {
 
     return res.status(201).json({
       message: "Signup successful! Check your email to verify your account.",
-      user: { id: newUser._id, fullName: newUser.fullName, email: newUser.email, avatar: newUser.avatar },
+      user: {
+        id: newUser._id,
+        fullName: newUser.fullName,
+        email: newUser.email,
+        avatar: newUser.avatar,
+      },
       token,
     });
-    
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: error.message });
@@ -107,50 +111,70 @@ export const login = async (req, res) => {
 
     const count = await User.countDocuments();
     // console.log(count);
-    if(count === 0) {
-      const newAdmin = await User.create({email, password, role: 'admin'});
+    if (count === 0) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      const newAdmin = await User.create({
+        email,
+        password: hashedPassword,
+        role: "admin",
+        isVerified: true,
+        verificationToken: null,
+      });
+
+      const adminToken = jwt.sign(
+        { id: newAdmin._id, role: "admin" },
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" }
+      );
+
       return res.status(201).json({
-        success: true, 
+        message: "Admin created successfully",
         user: {
-          id: newAdmin._id,
-          fullName: newAdmin.fullName,
+          _id: newAdmin._id,
           email: newAdmin.email,
-          password: newAdmin.password,
           role: newAdmin.role,
-          avatar: newAdmin.avatar,
-          isVerified: newAdmin.isVerified
+          isVerified: true,
         },
-        message: "Admin registered successfully"
+        token: adminToken,
       });
     }
-    
 
     // 1. Validate input
     if (!email || !password) {
-      return res.status(400).json({ message: "Email and password are required" });
+      return res
+        .status(400)
+        .json({ message: "Email and password are required" });
     }
 
     // 2. Find user
     const user = await User.findOne({ email });
-    if(user.role === 'admin') {
+    if (user.role === "admin") {
       const adminToken = jwt.sign(
-      { id: user._id, email: user.email, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "1d" }
-    );
+        { id: user._id, email: user.email, role: user.role },
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" }
+      );
 
-    return res.status(200).json({
-      message: "Login successful",
-      user: { id: user._id, fullName: user.fullName, email: user.email, role: user.role, avatar: user.avatar },
-      token: adminToken,
-    })
+      return res.status(200).json({
+        message: "Login successful",
+        user: {
+          id: user._id,
+          fullName: user.fullName,
+          email: user.email,
+          role: user.role,
+          avatar: user.avatar,
+        },
+        token: adminToken,
+      });
     }
-    
+
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
     // 3. Compare password
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid credentials" });
 
     // 4. Generate JWT
     const token = jwt.sign(
@@ -163,29 +187,38 @@ export const login = async (req, res) => {
 
     return res.status(200).json({
       message: "Login successful",
-      user: { id: user._id, fullName: user.fullName, email: user.email, role: user.role, avatar: user.avatar, isVerified: user.isVerified },
+      user: {
+        id: user._id,
+        fullName: user.fullName,
+        email: user.email,
+        role: user.role,
+        avatar: user.avatar,
+        isVerified: user.isVerified,
+      },
       token,
     });
   } catch (error) {
     console.error(error);
     // return res.status(500).json({ message: error.message });
-    return res.status(500).json({ message: "Please Sign Up!! , You are not a registered user" });
-  } 
+    return res
+      .status(500)
+      .json({ message: "Please Sign Up!! , You are not a registered user" });
+  }
 };
 
-
-
 //get user
-export const getUser = async (req,res)=>{
+export const getUser = async (req, res) => {
   try {
     // const user = req.params.email;
     const user = req.user;
     // const existingUser = await User.find({email:user});
     const existingUser = await User.findById(user._id);
-    if(user){
-      return res.status(201).json({message: "User found", user: existingUser})
+    if (user) {
+      return res
+        .status(201)
+        .json({ message: "User found", user: existingUser });
     }
   } catch (error) {
-    return res.status(500).json({message: "something went wrong", error})
+    return res.status(500).json({ message: "something went wrong", error });
   }
-}
+};

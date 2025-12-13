@@ -15,7 +15,7 @@ const AdminActions = ({ selectedAction }) => {
   }, []);
 
   const fetchAdmin = async () => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (!token) {
       alert("SignIn Required");
       navigate("/");
