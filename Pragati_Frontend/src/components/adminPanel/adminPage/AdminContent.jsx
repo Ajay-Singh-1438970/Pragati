@@ -25,7 +25,7 @@ const AdminContent = ({ selectedAction, setSelectedAction }) => {
           },
         });
         setAdmin(res.data.user);
-        console.log("Fetched admin:", res.data.user);
+        // console.log("Fetched admin:", res.data.user);
       } catch (error) {
         alert("Failed to Fetch Admin Profile");
         console.error("Fetch admin error:", error.response?.data || error.message);
