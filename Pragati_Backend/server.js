@@ -19,7 +19,7 @@ const __dirname = path.resolve();
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: true,
   credentials: true
 }));
 app.use(express.json());  // used for supporting all the frameworks and library.
