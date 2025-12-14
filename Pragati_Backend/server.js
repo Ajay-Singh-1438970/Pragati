@@ -18,7 +18,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.resolve();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true
+}));
 app.use(express.json());  // used for supporting all the frameworks and library.
 app.use(express.urlencoded({ extended: true }));  // used for supporting forms like login forms for using post method
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
