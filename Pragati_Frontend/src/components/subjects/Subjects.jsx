@@ -167,15 +167,16 @@ const Subjects = () => {
     return (
       <div className="text-center">
         <div className="d-flex vh-100 vw-100 justify-content-center align-items-center text-center flex-column">
-          <div className="p-4 border border-danger rounded mb-3">
+          <div className="p-4 mb-3">
             <div className="spinner-border text-brown" role="status">
-              <span> ☢️</span>
+              <span> ☢️ </span>
             </div>
-            Checking Authentication
-            <div className="spinner-border text-brown" role="status">
+           ' Checking Authentication... 
+            {/* <div className="spinner-border text-brown" role="status">
               <span> ☢️</span>
-            </div>
+            </div> */}
           </div>
+              ❗Please Login to access Resources
         </div>
       </div>
     );

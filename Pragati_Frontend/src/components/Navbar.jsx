@@ -13,11 +13,20 @@ const Navbar = () => {
 
   return (
     <>
+    <style>
+        {`
+          @media (max-width: 800px) {
+            .navbar-logo {
+              display: none !important;
+            }
+          }
+        `}
+      </style>
       <Nav className="navbar navbar-light bg-light shadow-sm">
         {/* Logo */}
         <div>
           <img
-          className="mx-3"
+          className="mx-3 navbar-logo"
           style={{ width: "50px", height: "50px" }}
           src={Logo}
           alt="logo"
@@ -47,13 +56,13 @@ const Navbar = () => {
             <Sidebar onClose={logout} />
           )}
         </div>
-      </Nav>
 
       {/* Login Modal */}
-      <Login
+        <Login
         show={showModal}
         handleClose={() => setShowModal(false)}
-      />
+        />
+        </Nav>
     </>
   );
 };
